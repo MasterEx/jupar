@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<update>
+    <instruction>
+	<action>MOVE</action>
+	<file>JupDemo.jar</file>
+	<destination>/home/periklis/Workspace/JUPDEMO/dist/JupDemo.jar</destination>
+    </instruction>
+</update>
