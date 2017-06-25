@@ -28,6 +28,7 @@ import jupar.parsers.UpdateXMLParser;
 /**
  *
  * @author Periklis Ntanasis
+ * @author Jan-Patrick Osterloh (fixed copy method to check if destination is folder and adds filename)
  */
 public class Updater {
 
@@ -35,7 +36,7 @@ public class Updater {
             FileNotFoundException, IOException, InterruptedException {
 
         UpdateXMLParser parser = new UpdateXMLParser();
-        Iterator iterator = parser.parse(tmp + File.separator + instructionsxml, mode).iterator();
+        Iterator<Instruction> iterator = parser.parse(tmp + File.separator + instructionsxml, mode).iterator();
         Instruction instruction;
 
         while (iterator.hasNext()) {
@@ -59,7 +60,7 @@ public class Updater {
             FileNotFoundException, IOException, InterruptedException {
 
         UpdateXMLParser parser = new UpdateXMLParser();
-        Iterator iterator = parser.parse(tmp + File.separator + instructionsxml, mode).iterator();
+        Iterator<Instruction> iterator = parser.parse(tmp + File.separator + instructionsxml, mode).iterator();
         Instruction instruction;
 
         while (iterator.hasNext()) {
@@ -82,6 +83,9 @@ public class Updater {
     private void copy(String source, String destination) throws FileNotFoundException, IOException {
         File srcfile = new File(source);
         File dstfile = new File(destination);
+        if (dstfile.isDirectory()) {
+        	dstfile = new File(destination + File.separator + srcfile.getName());
+        }
 
         InputStream in = new FileInputStream(srcfile);
         OutputStream out = new FileOutputStream(dstfile);
